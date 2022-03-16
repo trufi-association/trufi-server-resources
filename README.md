@@ -56,7 +56,7 @@ Now execute the builders in the following order
 
 ## Main `output` folder
 
-The `output` folder is `./data/<Country-City>`, where will be located all resources generated with this set of tools.
+The `output` folder is `./data/<Country-City>`, where will be located all resources generated with this set of tools. 
 
 Docker changed the permissions of the volumes and we don’t have the necessary rights anymore. We need to change that before we can copy the resources over to our [trufi-server](https://github.com/trufi-association/trufi-server) instance.
 
@@ -68,13 +68,15 @@ will do that for us.
 
 If you use the `pipeline` script this will be done automatically at the end.
 
+The contents there are now ready to be copied and merged into the `extensions` folder of your [trufi-server](https://github.com/trufi-association/trufi-server) instance.
+
 ## Resource Binding
 
 We use a system we call "Resource Binding" to make merging files from `/trufi-server-resources/data/<Country-City>/` into `/trufi-server/extensions` really easy. It basically means:
 
 > `./data/<Country-City/` in this repository is fileystem structure identical to the directory `./extensions` in the repo [trufi-server](https://github.com/trufi-association/trufi-server).
 
-We consider something "fileystem structure identical" if the directory and subdirectory names are equal.
+We consider something "fileystem structure identical" if the directory and subdirectory names of source and target are equal.
 
 ### Example A
 
@@ -97,8 +99,6 @@ to the following structure in `/trufi-server/extensions` in the repo [trufi-serv
 ```
 
 . So copying the contents in folder `/trufi-server-resources/data/Bolivia-Cochabamba` into `/trufi-server/extensions` would result in a merge creating the necessary structure and managing the necessary overwrites to make the extensions in repo `trufi-server` work (with updated data) you created using the toolset in repo `trufi-server-resources` (this one). This merge can be performed by a regular file manager.
-
-See also [Valor Narams' commit comment](https://github.com/trufi-association/trufi-server/commit/3d86fa074f0d5976d9b009f816d9bd20b27e2c64#commitcomment-64255648).
 
 ### Example B
 

@@ -54,7 +54,7 @@ Now execute the builders in the following order
 6. [Photon Data Builder](./photon-data-builder)
    Downloads & extracts the search index for your country needed to offer online search suggestions to the app. *Only use this builder if you want to use online search functionality and translation of coordinates into human friendly place names. Its use is recommended in places where mobile data usage do not matter in terms of pricing and availability.*
 
-## Main `output` folder
+## The `data` folder contains the output
 
 The `output` folder is `./data/<Country-City>`, where will be located all resources generated with this set of tools. 
 

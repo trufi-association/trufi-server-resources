@@ -9,9 +9,11 @@
 
 ## Description
 
-**This builder is only needed if you cannot obtain a GTFS by another means e.g. your authority does not provide a GTFS. This builder generates one making a virtual public transportation vehicle passing by every five minutes**
+**This builder is only needed if you cannot obtain a GTFS by another means e.g. your authority does not provide a GTFS.**
 
-Generates the GTFS needed to enable routing through public transportation routes. This is probably because your city is running informal public transport and as such there are no timetables and probably no fixed bus stops. In that case it makes no sense to generate a GTFS file because GTFS mainly contains the timetable in a machine readable format. But [OpenTripPlanner](https://opentripplanner.org) which we use as needs a GTFS file to make routing through public transportation work so we make use of some tricks to build a GTFS by creating a virtual timetable so OTP sees a public transportation vehicle passing by every five minutes.
+**If you don't need this builder** you just need to plot the GTFS file you've obtained in `./data/<Country-City>/otp/data` in your [trufi-server](https://github.com/trufi-association/trufi-server) instance.
+
+Generates the GTFS needed to enable routing through public transportation routes. This is probably because your city is running informal public transport and as such there are no timetables and probably no fixed bus stops. In that case it makes no sense to generate a GTFS file because GTFS mainly contains the timetable in a machine readable format. But [OpenTripPlanner](https://opentripplanner.org) which we use as needs a GTFS file to make routing through public transportation work so we make use of some tricks to build a GTFS by creating a virtual timetable so OTP sees a public transportation vehicle passing by e.g. every five minutes.
 
 ## How to use
 

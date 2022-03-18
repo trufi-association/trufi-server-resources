@@ -41,18 +41,20 @@ Replace `<city_env_file>` with the name of the configuration file you created pr
 
 Now execute the builders in the following order
 
-1. [Map PBF Data Builder](./map-pbf-builder)
+1. [**Map PBF Data Builder**](./map-pbf-builder)
    Downloads an OSM extract from [Geofabrik](https://geofabrik.de) and extracts only the area needed by the community to get an even smaller pbf extract.
-2. [MBTiles Builder](./mbtiles-builder)
+2. **[MBTiles Builder](./mbtiles-builder)**
    Generates the background map tiles in the `*.mbtiles` format used by many tile serving services like [OpenMapTiles](https://github.com/openmaptiles/openmaptiles) what we use for our extensions [tileserver](https://github.com/trufi-association/trufi-server/tree/main/extensions/tileserver) and as basis for [static_maps](https://github.com/trufi-association/trufi-server/tree/main/extensions/static_maps).
-3. [Static Map Tiles Builder](./static-map-tiles-builder)
+3. [**Static Map Tiles Builder**](./static-map-tiles-builder)
    Generates `*.png` map background tiles needed by the extension [static_maps](https://github.com/trufi-association/trufi-server/tree/main/extensions/static_maps) which is a fallback for servers with less CPU power and RAM e.g. cheap servers. *So only use this builder if you have such a server.*
-4. [GTFS Data Builder](./gtfs-builder)
-   Generates the GTFS needed to enable routing through public transportation routes. *Do not use this builder if you obtained a GTFS from elsewhere e.g. from your authority.*
-5. [Graph Data Builder](./graph-builder)
+4. **[GTFS Data Builder](./gtfs-builder)**
+   Generates the GTFS needed to enable routing through public transportation routes.
+   *If you obtained a GTFS from elsewhere e.g. from your authority then do not execute this builder but plot the GTFS file in `./data/<Country-City>/otp/data` in your [trufi-server](https://github.com/trufi-association/trufi-server) instance.*
+5. [**Graph Data Builder**](./graph-builder)
    Builds the graph needed by the routing engine [OpenTripPlanner](https://opentripplanner.org) which powers our extension [otp](https://github.com/trufi-association/trufi-server/tree/main/extensions/otp).
-6. [Photon Data Builder](./photon-data-builder)
-   Downloads & extracts the search index for your country needed to offer online search suggestions to the app. *Only use this builder if you want to use online search functionality and translation of coordinates into human friendly place names. Its use is recommended in places where mobile data usage do not matter in terms of pricing and availability.*
+6. [**Photon Data Builder**](./photon-data-builder)
+   Downloads & extracts the search index for your country needed to offer online search suggestions to the app.
+   *Only use this builder if you want to use online search functionality and translation of coordinates into human friendly place names. Its use is recommended in places where mobile data usage do not matter in terms of pricing and availability.*
 
 ## The `data` folder contains the output
 

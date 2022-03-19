@@ -194,7 +194,7 @@ echo -e "${primaryColor}## Clean up"
 echo ""
 echo "${textColor}<u>Executing command</u> \`sudo chown -R $USER:$USER ./data --verbose\`"
 if [ -z "$dryRun" ]; then # no simulation
-	sudo chown -R $SUDO_USER:$SUDO_USER ./data --verbose
+	sudo chown -R $USER:$USER ./data --verbose
 else
 	echo "> The output of command execution does not exist in the simulation mode"
 	echo ""

@@ -23,6 +23,7 @@ The config files are located inside `./config` folder, you can create a new one 
 | ------ | ------ | ------ |
 | city | Bolivia-Cochabamba | Just `Country-City` name |
 | bbox | -66.453088,-17.762296,-65.758056,-17.238372 | Just bound box of the city, you can get one [here](https://boundingbox.klokantech.com/) using `dublinCore type` |
+| otpversion | 1.5.0 | Put there `1.5.0` for regions running informal transport otherwise `2.0.0` |
 | geofabrik_url_path | /south-america/bolivia-latest.osm.pbf | You can get the `path` [here](https://download.geofabrik.de/) |
 
 Create a new one based on the already existing config files to get an idea of their internal structure. Optionally but relevant for automation later on you can specify any variable giving it any name taking a semicolon separated list of builder names without any whitespaces included to be executed in order. See section [Automation](#automation) for more details on this.

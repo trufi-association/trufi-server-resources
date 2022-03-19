@@ -2,7 +2,6 @@ version: '3'
 services:
   trufi-otp:
     container_name: trufi-otp
-    command: --build ./graphs --save
     build:
       context: ./$otpversion
       dockerfile: Dockerfile

@@ -50,7 +50,7 @@ Now execute the builders in the following order
    Generates `*.png` map background tiles needed by the extension [static_maps](https://github.com/trufi-association/trufi-server/tree/main/extensions/static_maps) which is a fallback for servers with less CPU power and RAM e.g. cheap servers. *So only use this builder if you have such a server.*
 4. **[GTFS Data Builder](./gtfs-builder)**
    Generates the GTFS needed to enable routing through public transportation routes.
-   *If you obtained a GTFS from elsewhere e.g. from your authority then do not execute this builder but plot the GTFS file in `./data/<Country-City>/otp/data` in your [trufi-server](https://github.com/trufi-association/trufi-server) instance.*
+   *If you obtained a GTFS from elsewhere e.g. from your authority then do not execute this builder but plot the GTFS file in `./data/<Country-City>/otp/data` in your [trufi-server-resources](https://github.com/trufi-association/trufi-server-resources) local copy before executing the next builder. Name the file `GTFS.zip`*
 5. [**Graph Data Builder**](./graph-builder)
    Builds the graph needed by the routing engine [OpenTripPlanner](https://opentripplanner.org) which powers our extension [otp](https://github.com/trufi-association/trufi-server/tree/main/extensions/otp).
 6. [**Photon Data Builder**](./photon-data-builder)

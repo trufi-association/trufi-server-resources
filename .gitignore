@@ -7,5 +7,5 @@ data/*
 *.obj
 *.pbf
 *.pbf
-mbtiles-builder/openmaptiles/*
-gtfs-builder/cities/*/out/*
+mbtiles-builder/openmaptiles/
+gtfs-builder/cities/*/out/

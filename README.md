@@ -63,7 +63,7 @@ The `output` folder is `./data/<Country-City>`, where will be located all resour
 Docker changed the permissions of the volumes and we don’t have the necessary rights anymore. We need to change that before we can copy the resources over to our [trufi-server](https://github.com/trufi-association/trufi-server) instance.
 
 ```bash
-sudo chown -R $SUDO_USER:$SUDO_USER ./data
+sudo chown -R $USER:$USER ./data
 ```
 
 will do that for us.

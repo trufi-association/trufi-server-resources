@@ -158,7 +158,7 @@ cd ../
 
 if ! [ -z "$city" ] && [ -d "$dataDir" ];
 then
-	sudo chown -R $USER:$USER $dataDir
+	sudo chown -R $USER:$USER "$dataDir"
 	echo -e "\033[0;33mCopying important things over to directory '$dataDir/tileserver/data'...\033[0;m"
 	[ -d "$dataDir/tileserver" ] || mkdir "$dataDir/tileserver" --verbose
 	[ -d "$dataDir/tileserver/data" ] || mkdir "$dataDir/tileserver/data" --verbose

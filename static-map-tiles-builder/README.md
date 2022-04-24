@@ -2,7 +2,7 @@
 
 | &nbsp;                                 | &nbsp;                                                       |
 | -------------------------------------- | ------------------------------------------------------------ |
-| The following extensions depend on it  | [static_maps](https://github.com/trufi-association/trufi-server/tree/main/extensions/static_maps) |
+| The following modules depend on it     | [static_maps](https://github.com/trufi-association/trufi-server-modules/tree/main/extensions/static_maps) |
 | This depends on the following builders | [mbtiles-builder](../mbtiles-builder)                        |
 
 ## Description
@@ -11,7 +11,7 @@
 
 Generates static `*.png` map background tiles by bulk querying the build-in OpenMapTiles service which can generate `*.png` files out of the `*.mbtile` input file. The static `*.png` files are needed by the fallback extension [static_maps](https://github.com/trufi-association/trufi-server/tree/main/extensions/static_maps) and is aimed at servers with less CPU power and RAM storage e.g. cheap servers.
 
-For servers with much CPU power we recommend using the extension [tileserver](https://github.com/trufi-association/trufi-server/tree/main/extensions/tileserver) and its [MBTile Builder](../mbtiles-builder) to be more dynamic to changes of the map styles and to be able to individualize map styles.
+For servers with much CPU power we recommend using the module [tileserver](https://github.com/trufi-association/trufi-server-modules/tileserver) and its [MBTile Builder](../mbtiles-builder) to be more dynamic to changes of the map styles and to be able to individualize map styles.
 
 ## How to use
 

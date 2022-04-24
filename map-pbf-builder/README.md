@@ -2,7 +2,7 @@
 
 | &nbsp;                                 | &nbsp; |
 | -------------------------------------- | ------ |
-| The following extensions depend on it  |        |
+| The following modules depend on it     |        |
 | This depends on the following builders |        |
 
 ## Description

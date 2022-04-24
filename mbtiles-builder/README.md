@@ -2,12 +2,12 @@
 
 | &nbsp;                                 | &nbsp;                                                       |
 | -------------------------------------- | ------------------------------------------------------------ |
-| The following extensions depend on it  | [tileserver](https://github.com/trufi-association/trufi-server/tree/main/extensions/tileserver) |
+| The following modules depend on it     | [tileserver](https://github.com/trufi-association/trufi-server-modules/tree/main/extensions/tileserver) |
 | This depends on the following builders | [map-pbf-builder](../map-pbf-builder)                        |
 
 ## Description
 
-Generates the background map tiles in the `*.mbtile` format used by many tile serving services like [OpenMapTiles](https://github.com/openmaptiles/openmaptiles) what we use for our extension [tileserver](https://github.com/trufi-association/trufi-server/tree/main/extensions/tileserver). Maps generated using this builder need to credit `© OpenMapTiles © OpenStreetMap contributors`. Attribution won't be applied automatically. This builder uses [OpenMapTiles](https://github.com/openmaptiles/openmaptiles) underneath.
+Generates the background map tiles in the `*.mbtile` format used by many tile serving services like [OpenMapTiles](https://github.com/openmaptiles/openmaptiles) what we use for our extension [tileserver](https://github.com/trufi-association/trufi-server-modules/tree/main/tileserver). Maps generated using this builder need to credit `© OpenMapTiles © OpenStreetMap contributors`. Attribution won't be applied automatically. This builder uses [OpenMapTiles](https://github.com/openmaptiles/openmaptiles) underneath.
 
 ## How to use
 

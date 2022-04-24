@@ -13,7 +13,7 @@
 
 | &nbsp;                                 | &nbsp;                                                       |
 | -------------------------------------- | ------------------------------------------------------------ |
-| The following extensions depend on it  | [extension name](https://github.com/trufi-association/trufi-server/tree/main/extensions) |
+| The following modules depend on it     | [module name](https://github.com/trufi-association/trufi-server-modules/tree/main/) |
 | This depends on the following builders |                                                              |
 
 ## Description

@@ -68,8 +68,8 @@ echo -e "\033[0;33mCloning OpenMapTiles GitHub repository...\033[0;m"
 git clone https://github.com/openmaptiles/openmaptiles.git
 cd openmaptiles
 
-echo -e "\033[0;33mWorkaround for bug 'https://github.com/openmaptiles/openmaptiles/issues/1378'\033[0;m"
-git revert 22915df78305bf7f2887ed2ec37cea6e7271d93f
+#echo -e "\033[0;33mWorkaround for bug 'https://github.com/openmaptiles/openmaptiles/issues/1378'\033[0;m"
+#git revert 22915df78305bf7f2887ed2ec37cea6e7271d93f
 
 echo -e "\033[0;33mInjecting our own '.env' file for OpenMapTiles...\033[0;m"
 cat << EOF > .env
@@ -79,7 +79,7 @@ cat << EOF > .env
 TILESET_FILE=openmaptiles.yaml
 
 # Use 3-part patch version to ignore patch updates, e.g. 5.0.0
-TOOLS_VERSION=6.1
+TOOLS_VERSION=latest
 
 # Make sure these values are in sync with the ones in .env-postgres file
 PGDATABASE=openmaptiles

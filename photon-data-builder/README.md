@@ -2,7 +2,7 @@
 
 | &nbsp;                                 | &nbsp;                                                       |
 | -------------------------------------- | ------------------------------------------------------------ |
-| The following extensions depend on it  | [photon](https://github.com/trufi-association/trufi-server/tree/main/extensions/photon) |
+| The following modules depend on it     | [photon](https://github.com/trufi-association/trufi-server-modules/tree/main/extensions/photon) |
 | This depends on the following builders |                                                              |
 
 ## Description

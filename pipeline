@@ -8,25 +8,28 @@
 # pipeline <configFile> <name of pipeline configured in the config>
 
 # Example usage
-# pipeline Hamburg-Germany pipelineTileserverAndPhoton
+# ./pipeline Germany-Hamburg pipeline_pbfgraphmbtiles
 
 # Example usages with options
 
 # Example usage --dry-run (does not execute anything, just simulates)
-# pipeline Hamburg-Germany pipelineTileserverAndPhoton --dry-run
+# ./pipeline Germany-Hamburg pipeline_pbfgraphmbtiles --dry-run
 
-# Example usage --no-color (useful for logging to a file or abother logging mechanism)
-# pipeline Hamburg-Germany pipelineTileserverAndPhoton --no-color
+# Example usage --stderr (useful for logging to a file or abother logging mechanism)
+# ./pipeline Germany-Hamburg pipeline_pbfgraphmbtiles --stderr 2>log.txt
+
+# Example usage --stderr with --markdown (useful for logging to a markdown file)
+# ./pipeline Germany-Hamburg pipeline_pbfgraphmbtiles  --stderr --dry-run --markdown 2>log.md
 
 # Of course options can be combined like
-# pipeline Hamburg-Germany pipelineTileserverAndPhoton --dry-run --no-color
-# to make a simulation and to not get colorized output
+# ./pipeline Germany-Hamburg pipeline_pbfgraphmbtiles --dry-run --stderr --markdown
+# to make a simulation and to save a markdown formatted file containing a markdown formatted log
 
 # -------------------------------------------------------------
 
 # That defined pattern is as follows:
-# 1. The script looks for ta line containing the following content: ## How to use
-# 2. The script extracts all content as long as it does not find a line containing ## or as long it does not reach the end of all lines
+# 1. The script looks for a line containing the following content: ## How to use
+# 2. The script extracts all content as long as it does not find another line containing ## or as long it does not reach the end of all lines
 # 3. In the extract it looks for a line containing the following content: ```bash
 # 4. The script extracts all content from the extract as long as it does not find a line containing ``` or as long it does not reach the end of all lines
 # 5. It has now the commands. Each line correspondends to an element in the array (array delimited by new line)
@@ -84,7 +87,8 @@ configFile="$1"
 configFile=${configFile//".env"/};
 noColor=$(echo "$@" | grep "\-\-no-color")
 dryRun=$(echo "$@" | grep "\-\-dry-run")
-
+toStderr=$(echo "$@" | grep "\-\-stderr")
+markdown=$(echo "$@" | grep "\-\-markdown")
 
 export $(cat "./config/$configFile.env" | xargs)
 export configFile=$configFile
@@ -96,6 +100,8 @@ pipeline=( $pipeline )
 
 extract=()
 input=()
+
+
 if [ -z "$noColor" ]; then # coloring is allowed
 	titleColor="\033[0;33m"
  	primaryColor="\033[0;34m"
@@ -104,6 +110,37 @@ if [ -z "$noColor" ]; then # coloring is allowed
  	colorEnd="\033[0;m"
 fi
 
+if [ -n "$markdown" ]; then # markdown mode
+	italicText="<ul>"
+	italicTextEnd="</ul>"
+	markdownHeading="#"
+fi
+
+echoError() {
+	if [ -n "$toStderr" ]; then
+		echo -e "$1" 1>&2
+	fi
+}
+
+echoTitle() {
+	echo -e "${titleColor}$1${colorEnd}"
+	echoError "$1"
+}
+
+echoPrimary() {
+	echo -e "${primaryColor}$1${colorEnd}"
+	echoError "$1"
+}
+
+echoSecondary() {
+	echo -e "${secondaryColor}$1${colorEnd}"
+	echoError "$1"
+}
+
+echoText() {
+	echo -e "${textColor}$1${colorEnd}"
+	echoError "$1"
+}
 
 extractFromArray() { # extraction algorithm
 	start_find="$1"
@@ -133,30 +170,36 @@ extractFromArray() { # extraction algorithm
 }
 
 startDateTime=$(date +"%x %X %Z")
-echo -e "${titleColor}# Run report: pipeline '$pipelineName' from $startDateTime $colorEnd"
-echo ""
+echoTitle "${markdownHeading} Run report: pipeline '$pipelineName' from $startDateTime"
+echoTitle ""
 
-echo -e "${textColor}Starting pipeline \`$pipelineName\` for environment \`$configFile\` ...$colorEnd"
-echo -e "${textColor}Date & Time started: $startDateTime $colorEnd"
+echoText "Starting pipeline \`$pipelineName\` for environment \`$configFile\` ..."
+echoText "Date & Time started: $startDateTime"
 if ! [ -z "$dryRun" ]; then # simulation
-	echo ""
-	echo -e "${textColor}This is a dry-run. In that mode no commands are executed actually! $colorEnd"
-	echo ""
+	echoText ""
+	echoText "This is a dry-run. In that mode no commands are executed actually!"
+	echoText ""
 fi
 
-echo ""
-echo "- [Executing builders](#executing-builders)"
-for builder in "${pipeline[@]}"; do
-	echo "  - [$builder](#$builder)"
-done
-echo "- [Clean up](#clean-up)"
-echo ""
+if [ -n "$markdown" ]; then # markdown mode
+	echoError ""
+	echoError "- [Executing builders](#executing-builders)"
+	for builder in "${pipeline[@]}"; do
+		echoError "  - [$builder](#$builder)"
+	done
+	echoError "- [Clean up](#clean-up)"
+	echoError ""
+fi
 
 getCommandsToExecute() {
 	extract=()
 	input=()
-
-	echo -e "${textColor}<u>Reading run configuration from \`$builder\`'s [README](./$builder/README.md) ...</u>$colorEnd"
+	
+	local readmeHyperlink="'./$builder/README.md'"
+	if [ -n "$markdown" ]; then
+		readmeHyperlink="[README](./$builder/README.md)"
+	fi
+	echoText "${italicText}Reading run configuration from \`$builder\`'s $readmeHyperlink ...${italicTextEnd}"
 	# read file and convert its content in an array delimited by new line
 	readarray input < "./README.md"
 	
@@ -168,34 +211,33 @@ getCommandsToExecute() {
 	
 }
 
-echo -e "${primaryColor}## Executing builders $colorEnd"
-echo ""
+echoPrimary "${markdownHeading}${markdownHeading} Executing builders"
+echoPrimary ""
 
 for builder in "${pipeline[@]}"; do
-	echo ${secondaryColor}
-	echo -e "${secondaryColor}### $builder $colorEnd"
-	echo ""
+	echoSecondary "${markdownHeading}${markdownHeading}${markdownHeading} $builder"
+	echoText ""
 	cd $builder
 	getCommandsToExecute $builder
 	for cmd in "${extract[@]}"; do
 		cmd=${cmd//"#"/" "}
-		echo -e "${textColor}<u>Executing command</u> \`$cmd\` ... $colorEnd"
+		echoText "${italicText}Executing command${italicTextEnd} \`$cmd\` ..."
 		if [ -z "$dryRun" ]; then # no simulation
 			eval $cmd
 		else # simulation
-			echo "> The output of command execution does not exist in the simulation mode"
-			echo ""
+			echoText "> The output of command execution does not exist in the simulation mode"
+			echoText ""
 		fi
 	done
 	cd ../
 done
 
-echo -e "${primaryColor}## Clean up"
-echo ""
-echo "${textColor}<u>Executing command</u> \`sudo chown -R $USER:$USER ./data --verbose\`"
+echoPrimary "${markdownHeading}${markdownHeading} Clean up"
+echoPrimary ""
+echoText "${italicText}Executing command${italicTextEnd} \`sudo chown -R $USER:$USER ./data --verbose\`"
 if [ -z "$dryRun" ]; then # no simulation
 	sudo chown -R $USER:$USER ./data --verbose
 else
-	echo "> The output of command execution does not exist in the simulation mode"
-	echo ""
+	echoText "> The output of command execution does not exist in the simulation mode"
+	echoText ""
 fi

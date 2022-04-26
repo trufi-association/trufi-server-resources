@@ -2,7 +2,7 @@
 
 | &nbsp;                                 | &nbsp;                                                       |
 | -------------------------------------- | ------------------------------------------------------------ |
-| The following extensions depend on it  | [otp](https://github.com/trufi-association/trufi-server/tree/main/extensions/otp) |
+| The following modules depend on it     | [otp](https://github.com/trufi-association/trufi-server-modules/tree/main/extensions/otp) |
 | This depends on the following builders | [map-pbf-builder](../map-pbf-builder) (always), [gtfs-builder](../gtfs-builder) (only if you have no GTFS file already) |
 
 ## Description

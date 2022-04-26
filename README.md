@@ -1,13 +1,14 @@
 # Trufi Server Resources
-**Resources generator for [Trufi-Server](https://github.com/trufi-association/trufi-server)**.
 
-This repo contains all builders needed to create the resources which [trufi-server](https://github.com/trufi-association/trufi-server) needs, you only need to provide a `config` file inside the `./config` folder for most services. The *GTFS Builder* needs more and is an exception.
+Resource generator [trufi-server-modules](https://github.com/trufi-association/trufi-server-modules) used by the backend variants [trufi-server-single](https://github.com/trufi-association/trufi-server-single) and [trufi-server-multi](https://github.com/trufi-association/trufi-server-multi).
+
+This repo contains all builders needed to create the resources the modules at [trufi-server-modules](https://github.com/trufi-association/trufi-server-modules) need, you only need to provide a `config` file inside the `./config` folder for most services. The *GTFS Builder* needs more and is an exception.
 
 **We use docker but not to make this cross-platform. This is intended to be used on Linux. Mac will probably work but is untested. We use docker to make setups equal and easy for all users and their systems.**
 
 ## Requirements
 
-- [Docker](https://www.docker.com/products/docker-desktop)
+- Docker
 - docker-compose
 - nodejs (deprecated, to remove)
 - Config file
@@ -21,10 +22,10 @@ This assumes that you already met all the requirements.
 The config files are located inside `./config` folder, you can create a new one providing your own variables:
 | variable | example | description |
 | ------ | ------ | ------ |
-| city | Bolivia-Cochabamba | Just `Country-City` name |
-| bbox | -66.453088,-17.762296,-65.758056,-17.238372 | Just bound box of the city, you can get one [here](https://boundingbox.klokantech.com/) using `dublinCore type` |
-| otpversion | 1.5.0 | Put there `1.5.0` for regions running informal transport otherwise `2.0.0` |
-| geofabrik_url_path | /south-america/bolivia-latest.osm.pbf | You can get the `path` [here](https://download.geofabrik.de/) |
+| city | `Bolivia-Cochabamba` | Just `Country-City` name |
+| bbox | `-66.453088,-17.762296,-65.758056,-17.238372` | Just bound box of the city, you can get one [here](https://boundingbox.klokantech.com/) selecting *dublinCore type* |
+| otpversion | `1.5.0` | Put there `1.5.0` for regions running informal transport otherwise `2.0.0` . See the [comparison](http://docs.opentripplanner.org/en/latest/Version-Comparison/) |
+| geofabrik_url_path | `/south-america/bolivia-latest.osm.pbf` | You can get the path [here](https://download.geofabrik.de/) |
 
 Create a new one based on the already existing config files to get an idea of their internal structure. Optionally but relevant for automation later on you can specify any variable giving it any name taking a semicolon separated list of builder names without any whitespaces included to be executed in order. See section [Automation](#automation) for more details on this.
 

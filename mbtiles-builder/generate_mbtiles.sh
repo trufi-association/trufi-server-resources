@@ -68,6 +68,9 @@ echo -e "\033[0;33mCloning OpenMapTiles GitHub repository...\033[0;m"
 git clone https://github.com/openmaptiles/openmaptiles.git
 cd openmaptiles
 
+echo -e "\033[0;33mWorkaround for bug 'https://github.com/openmaptiles/openmaptiles/issues/1378'\033[0;m"
+git revert 22915df78305bf7f2887ed2ec37cea6e7271d93f
+
 echo -e "\033[0;33mInjecting our own '.env' file for OpenMapTiles...\033[0;m"
 cat << EOF > .env
 # This file defines default environment variables for all images

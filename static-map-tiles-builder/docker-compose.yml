@@ -3,7 +3,7 @@ services:
   map_builder:
     image: map_builder
     build: .
-    environment: 
+    environment:
       - city=$city
       - bbox=$bbox
     volumes:
@@ -13,23 +13,26 @@ services:
         condition: service_healthy
 
   tileserver:
+    # should be equal to the name of the folder name this compose is in
     image: maptiler/tileserver-gl
     command: --port 8080 --config /config/config.json --verbose
     volumes:
-      - "./config:/config"
-      - "../data/$city/tileserver/region:/region"
+      - ./data:/region # the name of the folder on the host needs to have the name 'data' and it should contain the files you want to persist between docker container builds. This makes it easier to add (updated) data generated with https://github.com/trufi-association/trufi-server-resources
+      - ./config:/config
+    ports:
+      - 8080:8080
     healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost/health"]
-        interval: 5s
-        timeout: 2s
-        retries: 20
-    
-  #tileserver:
-    #image: klokantech/tileserver-gl
-    #volumes:
+      test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/8080' || exit 1
+      interval: 30s
+      timeout: 15s
+      retries: 3
+
+      #tileserver:
+      #image: klokantech/tileserver-gl
+      #volumes:
       #- ../map-data-builder/data/$city:/data # TODO: need to make this work again
-    #healthcheck:
-        #test: ["CMD", "curl", "-f", "http://localhost/health"]
-        #interval: 5s
-        #timeout: 2s
-        #retries: 20
+      #healthcheck:
+      #test: ["CMD", "curl", "-f", "http://localhost/health"]
+      #interval: 5s
+      #timeout: 2s
+      #retries: 20

@@ -35,9 +35,12 @@ fi;
 
 echo "file exists"
 echo "extracting the bz2 archive..."
-pbzip2 -d $filenameBZ2
-echo "extracting the tar archive..."
-tar -xf $filenameTar
+tar -xjvf "$filenameBZ2"
+#pbzip2 -d $filenameBZ2
+#bzip2 -dk "$filenameBZ2"
+#echo "extracting the tar archive..."
+#tar -xf $filenameTar
+#tar -xjvf "$filenameTar"
 exitcode=$?
 echo "Extraction finish, execution finish"
 exit $exitcode # return the exit code of the tar command

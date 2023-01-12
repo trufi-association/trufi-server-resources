@@ -6,7 +6,7 @@ RUN apt update
 RUN apt install -y apt-utils
 RUN apt update
 RUN apt install -y apt-transport-https
-RUN apt install -y pbzip2 wget
+RUN apt install -y pbzip2 bzip2 wget
 
 WORKDIR /app
 

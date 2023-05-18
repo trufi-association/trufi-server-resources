@@ -1,6 +1,6 @@
 {
   "version": 8,
-  "name": "Trufi Liberty",
+  "name": "OSM Liberty",
   "metadata": {
     "maputnik:license": "https://github.com/maputnik/osm-liberty/blob/gh-pages/LICENSE.md",
     "maputnik:renderer": "mbgljs",
@@ -9,7 +9,15 @@
   "sources": {
     "openmaptiles": {
       "type": "vector",
-      "url": "mbtiles://{region-tiles}"
+      "url": "mbtiles://{tiles}"
+    },
+    "natural_earth_shaded_relief": {
+      "maxzoom": 6,
+      "tileSize": 256,
+      "tiles": [
+        "https://klokantech.github.io/naturalearthtiles/tiles/natural_earth_2_shaded_relief.raster/{z}/{x}/{y}.png"
+      ],
+      "type": "raster"
     }
   },
   "sprite": "https://maputnik.github.io/osm-liberty/sprites/osm-liberty",
@@ -19,6 +27,13 @@
       "id": "background",
       "type": "background",
       "paint": {"background-color": "rgb(239,239,239)"}
+    },
+    {
+      "id": "natural_earth",
+      "type": "raster",
+      "source": "natural_earth_shaded_relief",
+      "maxzoom": 6,
+      "paint": {"raster-opacity": {"base": 1.5, "stops": [[0, 0.6], [6, 0.1]]}}
     },
     {
       "id": "park",
@@ -776,7 +791,7 @@
       ],
       "layout": {"line-cap": "round", "line-join": "round"},
       "paint": {
-        "line-color": "rgba(255, 193, 110, 1)",
+        "line-color": "#fea",
         "line-width": {"base": 1.2, "stops": [[6.5, 0], [8, 0.5], [20, 13]]}
       }
     },
@@ -1488,7 +1503,16 @@
       "source-layer": "place",
       "filter": [
         "all",
-        ["in", "class", "hamlet", "island", "islet", "neighbourhood", "suburb"]
+        [
+          "in",
+          "class",
+          "hamlet",
+          "island",
+          "islet",
+          "neighbourhood",
+          "suburb",
+          "quarter"
+        ]
       ],
       "layout": {
         "text-field": "{name_en}",

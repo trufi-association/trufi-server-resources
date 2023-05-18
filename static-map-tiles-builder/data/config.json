@@ -1,0 +1,33 @@
+{
+  "options": {
+    "paths": {
+      "root": "/data",
+      "fonts": "/usr/src/app/node_modules/tileserver-gl-styles/fonts",
+      "styles": "styles",
+      "mbtiles": ""
+    }
+  },
+  "styles": {
+    "osm-liberty": {
+      "style": "osm-liberty.json",
+      "tilejson": {
+        "bounds": [
+          -78.634277,-0.361678,-78.297577,-0.008215
+        ]
+      }
+    },
+    "basic-preview": {
+      "style": "basic-preview.json",
+      "tilejson": {
+        "bounds": [
+          -78.634277,-0.361678,-78.297577,-0.008215
+        ]
+      }
+    }
+  },
+  "data": {
+    "tiles": {
+      "mbtiles": "tiles.mbtiles"
+    }
+  }
+}

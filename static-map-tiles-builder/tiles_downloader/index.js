@@ -88,6 +88,6 @@ tilesInBbox({
   south: bbox[1],
   east: bbox[2],
   north: bbox[3]
-}, 18, ["trufi-liberty", "trufi-dark"], "@2x.jpg").catch(error => {
+}, 18, ["basic-preview","osm-liberty"], "@2x.jpg").catch(error => {
   console.log(error)
 })

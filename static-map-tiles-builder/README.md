@@ -18,7 +18,7 @@ For servers with much CPU power we recommend using the module [tileserver](https
 Just run the command and see the magic:
 
 ```bash
-docker-compose --env-file ../$envfile -f ./docker-compose.yml up --build map_builder && docker-compose -f ./docker-compose.yml stop
+docker compose --env-file ../config/Ecuador-Quito.env -f ./docker-compose.yml up --build map_builder && docker-compose -f ./docker-compose.yml stop
 ```
 
 - The static map tiles images will be located at `../data/<Country-City>/static_maps`

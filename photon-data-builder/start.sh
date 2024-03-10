@@ -33,14 +33,16 @@ then
 	exit 2
 fi;
 
+mkdir data
+mv "$filenameBZ2" "data/$filenameBZ2"
+cd data
+
 echo "file exists"
 echo "extracting the bz2 archive..."
-tar -xjvf "$filenameBZ2"
-#pbzip2 -d $filenameBZ2
-#bzip2 -dk "$filenameBZ2"
-#echo "extracting the tar archive..."
-#tar -xf $filenameTar
-#tar -xjvf "$filenameTar"
+pbzip2 -d "$filenameBZ2" # works
+echo "extracting the tar archive..."
+tar -xf "$filenameTar" # works
+rm "$filenameTar"
 exitcode=$?
 echo "Extraction finish, execution finish"
 exit $exitcode # return the exit code of the tar command

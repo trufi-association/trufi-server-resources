@@ -6,6 +6,6 @@ services:
         command: "--input \"/srv/input/${city}.osm.pbf\" --output \"/srv/output/${city}.mbtiles\" --config \"/srv/config/config-openmaptiles.json\" --process \"/srv/config/process-openmaptiles.lua\""
         volumes:
             - "../data/${city}/otp/data:/srv/input"
-            - "../data/${city}/tileserver:/srv/output"
+            - "../data/${city}/tileserver/data:/srv/output"
             - "./coastline:/srv/coastline"
             - "./config:/srv/config"

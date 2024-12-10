@@ -1,11 +1,10 @@
 node_modules/
 .DS_Store
 data/*
-*.osm.pbf
 *.mbtiles
 *.zip
 *.obj
 *.pbf
-*.pbf
 mbtiles-builder/openmaptiles/
+mbtiles-builder/coastline
 gtfs-builder/cities/*/out/

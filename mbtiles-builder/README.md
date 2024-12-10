@@ -1,9 +1,9 @@
 # MBTiles Builder
 
-| &nbsp;                                 | &nbsp;                                                       |
-| -------------------------------------- | ------------------------------------------------------------ |
+| &nbsp;                                 | &nbsp;                                                                                                  |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------- |
 | The following modules depend on it     | [tileserver](https://github.com/trufi-association/trufi-server-modules/tree/main/extensions/tileserver) |
-| This depends on the following builders | [map-pbf-builder](../map-pbf-builder)                        |
+| This depends on the following builders | [map-pbf-builder](../map-pbf-builder)                                                                   |
 
 ## Description
 
@@ -11,11 +11,35 @@ Generates the background map tiles in the `*.mbtile` format used by many tile se
 
 ## How to use
 
-This tool will generate a `.mbtile` file which contains the necessary data for generating map background tiles either on the fly (upon request by the client) or static using the builder [*Static Map Tiles Builder*](./static-map-tiles-builder). Run the following commands:
+This tool will generate a `.mbtile` file which contains the necessary data for displaying a vector map:
+
+### Download coastline
+
+This only needs to be done on the first use of the builder when the folder `./coastline` is empty or does not exist.
 
 ```bash
-export $(cat ../$envfile | xargs)
-bash generate_mbtiles.sh
+wget -O water-polygons.zip https://osmdata.openstreetmap.de/download/water-polygons-split-4326.zip
+unzip water-polygons.zip
 ```
 
-- The `.mbtile` file out is located at `../data/<Country-City>/tileserver/region/`
+Remove the zip file and rename the extracted folder manually to `coastline` or use the following automation:
+
+```bash
+# determine folder name via pattern
+nameOfFolder=`ls | grep "water-polygons-split"`
+## give the found folder the name 'coastline'
+mv "$nameOfFolder" "coastline" --verbose
+## delete the zip
+rm water-polygons.zip --verbose
+```
+
+### Running
+
+If the coastline has been downloaded and extracted properly, then we can start building a mbtile using
+
+```bash
+docker-compose --env-file ../$envfile -f docker-compose.yml up
+
+```
+
+- The `.mbtile` file out is located at `../data/<Country-City>/tileserver/${city}.mbtiles`
